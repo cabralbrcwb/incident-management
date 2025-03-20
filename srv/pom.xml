@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- POM pai -->
+  <parent>
+    <artifactId>incident-management-parent</artifactId>
+    <groupId>customer</groupId>
+    <version>${revision}</version>
+  </parent>
+
+  <artifactId>incident-management</artifactId>
+  <packaging>jar</packaging>
+  <name>incident-management</name>
+
+  <!-- ===================== Dependências do Projeto ===================== -->
+  <dependencies>
+
+    <!-- CDS Spring Boot Starter -->
+    <dependency>
+      <groupId>com.sap.cds</groupId>
+      <artifactId>cds-starter-spring-boot</artifactId>
+    </dependency>
+
+    <!-- Suporte a hot-reload / devtools no Spring Boot -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- Dependências para testes (JUnit / Spring Boot Test) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Adaptador OData V4 para CAP em runtime -->
+    <dependency>
+      <groupId>com.sap.cds</groupId>
+      <artifactId>cds-adapter-odata-v4</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- Banco de dados H2 em memória (somente em runtime local) -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- Extensão para Cloud Foundry (SAP BTP) -->
+    <dependency>
+      <groupId>com.sap.cds</groupId>
+      <artifactId>cds-starter-cloudfoundry</artifactId>
+    </dependency>
+
+	<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-test</artifactId>
+    <scope>test</scope>	
+</dependency>
+
+  	<dependency>
+  		<groupId>org.springframework.boot</groupId>
+  		<artifactId>spring-boot-starter-actuator</artifactId>
+  	</dependency>
+
+
+  </dependencies>
+  <!-- =================================================================== -->
+
+  <!-- ===================== Configurações de Build ====================== -->
+  <build>
+    <!-- Nome final do JAR gerado -->
+    <finalName>${project.artifactId}</finalName>
+
+    <plugins>
+
+      <!-- Plugin do Spring Boot para empacotar o JAR executável -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring.boot.version}</version>
+        <configuration>
+          <skip>false</skip>
+        </configuration>
+        <executions>
+          <execution>
+            <id>repackage</id>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+            <configuration>
+              <classifier>exec</classifier>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Plugin do CAP (cds-maven-plugin) para compilar modelos CDS e gerar POJOs -->
+      <plugin>
+        <groupId>com.sap.cds</groupId>
+        <artifactId>cds-maven-plugin</artifactId>
+        <version>${cds.services.version}</version>
+        <executions>
+
+          <!-- Limpeza de artefatos gerados -->
+          <execution>
+            <id>cds.clean</id>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+
+          <!-- Instalação do Node.js para usar npm -->
+          <execution>
+            <id>cds.install-node</id>
+            <goals>
+              <goal>install-node</goal>
+            </goals>
+          </execution>
+
+          <!-- Executar 'npm ci' conforme especificado no package.json -->
+          <execution>
+            <id>cds.npm-ci</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>ci</arguments>
+            </configuration>
+          </execution>
+
+          <!-- Resolver dependências do projeto CAP -->
+          <execution>
+            <id>cds.resolve</id>
+            <goals>
+              <goal>resolve</goal>
+            </goals>
+          </execution>
+
+          <!-- Compilar o modelo para Java e gerar script de deploy para H2 -->
+          <execution>
+            <id>cds.build</id>
+            <goals>
+              <goal>cds</goal>
+            </goals>
+            <configuration>
+              <commands>
+                <command>build --for java</command>
+                <command>deploy --to h2 --dry --out "${project.basedir}/src/main/resources/schema-h2.sql"</command>
+              </commands>
+            </configuration>
+          </execution>
+
+          <!-- Gerar classes Java (POJOs) no pacote cds.gen -->
+          <execution>
+            <id>cds.generate</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <basePackage>cds.gen</basePackage>
+            </configuration>
+          </execution>
+
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <!-- =================================================================== -->
+
+</project>
