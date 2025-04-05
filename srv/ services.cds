@@ -50,3 +50,19 @@ service AdminService {
 
 // Require 'admin' authorization role to access this service
 annotate AdminService with @(requires: 'admin');
+
+service CepService {
+    action buscarEndereco(cep: String) returns Endereco;
+}
+
+type Endereco {
+    cep: String;
+    logradouro: String;
+    complemento: String;
+    bairro: String;
+    localidade: String;
+    uf: String;
+    ibge: String;
+    ddd: String;
+    siafi: String;
+}
