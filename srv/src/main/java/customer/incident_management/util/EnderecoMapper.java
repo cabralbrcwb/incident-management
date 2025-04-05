@@ -29,7 +29,6 @@ public class EnderecoMapper {
         e.setIbge(resp.getIbge());
         e.setDdd(resp.getDdd());
         e.setSiafi(resp.getSiafi());
-        // Se tiver 'gia' no seu .cds e no EnderecoResponse, inclua aqui.
 
         return e;
     }
