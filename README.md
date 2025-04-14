@@ -9,7 +9,7 @@
 
 Uma aplicação robusta de gerenciamento de incidentes construída com SAP Cloud Application Programming Model (CAP) utilizando Java. Esta solução fornece uma plataforma completa para rastreamento, gerenciamento e resolução de incidentes, totalmente integrada com o ecossistema SAP e implantada na SAP Business Technology Platform (BTP).
 
-![Interface principal da aplicação](https://github.com/seuusuario/incident-management/raw/main/screenshots/incident-list.png)
+
 
 ## 🚀 Principais Recursos
 
