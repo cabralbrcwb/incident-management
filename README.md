@@ -9,8 +9,6 @@
 
 Uma aplicação robusta de gerenciamento de incidentes construída com SAP Cloud Application Programming Model (CAP) utilizando Java. Esta solução fornece uma plataforma completa para rastreamento, gerenciamento e resolução de incidentes, totalmente integrada com o ecossistema SAP e implantada na SAP Business Technology Platform (BTP).
 
-
-
 ## 🚀 Principais Recursos
 
 - Gerenciamento completo do ciclo de vida de incidentes
@@ -66,28 +64,6 @@ A aplicação segue uma arquitetura multicamada:
 │                       SAP S/4HANA Cloud                         │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
-## 📸 Capturas de Tela
-
-### Página Inicial do SAP BTP
-![Página Inicial do SAP BTP](https://github.com/cabralbrcwb/incident-management/raw/main/screenshots/home_btp_01.png)
-
-### Instâncias e Subscrições
-![Instâncias e Subscrições](https://github.com/cabralbrcwb/incident-management/raw/main/screenshots/instances_subscriptions.png)
-
-### Painel de Controle SAP BTP (Grid View)
-![Painel de Controle SAP BTP 1](https://github.com/cabralbrcwb/incident-management/raw/main/screenshots/grid_btp_01.png)
-![Painel de Controle SAP BTP 2](https://github.com/cabralbrcwb/incident-management/raw/main/screenshots/grid_btp_02.png)
-
-### Aplicações de Desenvolvimento
-![Aplicações de Desenvolvimento](https://github.com/cabralbrcwb/incident-management/raw/main/screenshots/dev_applications.png)
-
-### Processo de Implantação MTA
-![Processo de Implantação MTA](https://github.com/cabralbrcwb/incident-management/raw/main/screenshots/deploy_mta.png)
-
-### Exemplo da Interface de Incidentes
-![Lista de Incidentes](https://github.com/cabralbrcwb/incident-management/raw/main/screenshots/incidents-list.png)
-![Detalhes do Incidente](https://github.com/cabralbrcwb/incident-management/raw/main/screenshots/incident-details.png)
 
 ## 📁 Estrutura do Projeto
 
@@ -150,8 +126,6 @@ O aplicativo gerencia as seguintes entidades principais:
 ```cds
 namespace com.mycompany.cepsvc;
 
-// Define um tipo estruturado Endereco,
-// representando o payload do ViaCEP
 type Endereco {
     cep         : String; 
     logradouro  : String;
@@ -164,9 +138,7 @@ type Endereco {
     siafi       : String;
 }
 
-// Servico OData: CepService
 service CepService {
-    // Action nao-vinculada: recebe um CEP, retorna um Endereco
     action buscarEndereco(cep: String) returns Endereco;
 }
 ```
@@ -198,8 +170,6 @@ Fluxo de implantação:
 └───────────┘     └───────────┘     └───────────┘     └───────────┘
 ```
 
-![Processo de Implantação](https://github.com/seuusuario/incident-management/raw/main/screenshots/deployment-process.png)
-
 ## 🏃‍♂️ Executando Localmente
 
 ### Pré-requisitos
@@ -214,7 +184,7 @@ Fluxo de implantação:
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seuusuario/incident-management.git
+   git clone https://github.com/seu-usuario/incident-management.git
    cd incident-management
    ```
 
@@ -245,8 +215,6 @@ Fluxo de desenvolvimento:
                                     └───────────────────┘
 ```
 
-![Ambiente de Desenvolvimento](https://github.com/seuusuario/incident-management/raw/main/screenshots/development-environment.png)
-
 ## 📄 Documentação da API
 
 Serviços OData estão disponíveis em:
@@ -276,38 +244,30 @@ O sistema utiliza a API pública ViaCEP para automatizar a consulta de endereço
 A integração é feita através de um serviço OData que consome a API REST do ViaCEP:
 
 ```java
-// CepServiceHandler.java
 @Component
 public class CepServiceHandler implements EventHandler {
 
     @On(event = BuscarEnderecoContext.CDS_NAME)
     public void onBuscarEndereco(BuscarEnderecoContext context) {
         String cep = context.getCep();
-        // Validação do formato do CEP
         if (cep == null || !cep.matches("\\d{8}")) {
             throw new ServiceException(ErrorStatuses.BAD_REQUEST,
                 "CEP inválido. Informe 8 dígitos numéricos.");
         }
 
-        // Chamada à API ViaCEP
         String url = "https://viacep.com.br/ws/" + cep + "/json/";
         RestTemplate restTemplate = new RestTemplate();
         
         try {
             EnderecoResponse apiResponse = restTemplate.getForObject(url, EnderecoResponse.class);
-            // Conversão e retorno do resultado
             context.setResult(EnderecoMapper.map(apiResponse));
         } catch (Exception e) {
-            // Tratamento de erros
             throw new ServiceException(ErrorStatuses.BAD_GATEWAY,
                 "Erro ao consultar ViaCEP: " + e.getMessage(), e);
         }
     }
 }
-
-## 📝 Licença
-
-Este projeto está licenciado sob a Licença MIT - consulte o arquivo LICENSE para obter detalhes.
+```
 
 ## 📊 Estatísticas e Monitoramento
 
@@ -328,5 +288,6 @@ A interface do SAP BTP Cockpit oferece painéis detalhados para monitorar:
 - Utilização de recursos da plataforma (memória, CPU, requisições)
 
 
-Este projeto demonstra a implementação de uma solução robusta de gerenciamento de incidentes aproveitando todo o potencial do ecossistema SAP Cloud, fornecendo uma base sólida que pode ser estendida para atender a necessidades específicas de negócios.
+---
 
+Este projeto demonstra a implementação de uma solução robusta de gerenciamento de incidentes aproveitando todo o potencial do ecossistema SAP Cloud, fornecendo uma base sólida que pode ser estendida para atender a necessidades específicas de negócios.
