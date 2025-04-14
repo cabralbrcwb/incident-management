@@ -288,6 +288,7 @@ A interface do SAP BTP Cockpit oferece painéis detalhados para monitorar:
 - Utilização de recursos da plataforma (memória, CPU, requisições)
 
 
+
 ---
 
 Este projeto demonstra a implementação de uma solução robusta de gerenciamento de incidentes aproveitando todo o potencial do ecossistema SAP Cloud, fornecendo uma base sólida que pode ser estendida para atender a necessidades específicas de negócios.
