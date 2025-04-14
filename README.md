@@ -65,6 +65,28 @@ A aplicação segue uma arquitetura multicamada:
 └─────────────────────────────────────────────────────────────────┘
 ```
 
+## 📸 Capturas de Tela
+
+### Página Inicial do SAP BTP
+![Página Inicial do SAP BTP](https://github.com/seu-usuario/incident-management/raw/main/screenshots/home_btp_01.png)
+
+### Instâncias e Subscrições
+![Instâncias e Subscrições](https://github.com/seu-usuario/incident-management/raw/main/screenshots/instances_subscriptions.png)
+
+### Painel de Controle SAP BTP (Grid View)
+![Painel de Controle SAP BTP 1](https://github.com/seu-usuario/incident-management/raw/main/screenshots/grid_btp_01.png)
+![Painel de Controle SAP BTP 2](https://github.com/seu-usuario/incident-management/raw/main/screenshots/grid_btp_02.png)
+
+### Aplicações de Desenvolvimento
+![Aplicações de Desenvolvimento](https://github.com/seu-usuario/incident-management/raw/main/screenshots/dev_applications.png)
+
+### Processo de Implantação MTA
+![Processo de Implantação MTA](https://github.com/seu-usuario/incident-management/raw/main/screenshots/deploy_mta.png)
+
+### Exemplo da Interface de Incidentes
+![Lista de Incidentes](https://github.com/seu-usuario/incident-management/raw/main/screenshots/incidents-list.png)
+![Detalhes do Incidente](https://github.com/seu-usuario/incident-management/raw/main/screenshots/incident-details.png)
+
 ## 📁 Estrutura do Projeto
 
 ```
@@ -170,6 +192,8 @@ Fluxo de implantação:
 └───────────┘     └───────────┘     └───────────┘     └───────────┘
 ```
 
+![Processo de Implantação](https://github.com/seu-usuario/incident-management/raw/main/screenshots/deployment-process.png)
+
 ## 🏃‍♂️ Executando Localmente
 
 ### Pré-requisitos
@@ -214,6 +238,8 @@ Fluxo de desenvolvimento:
 └───────────┘     └───────────┘     │ mvn spring-boot:run│
                                     └───────────────────┘
 ```
+
+![Ambiente de Desenvolvimento](https://github.com/seu-usuario/incident-management/raw/main/screenshots/development-environment.png)
 
 ## 📄 Documentação da API
 
@@ -286,6 +312,7 @@ A interface do SAP BTP Cockpit oferece painéis detalhados para monitorar:
 - Tempo médio de resolução de incidentes
 - Distribuição de incidentes por urgência e status
 - Utilização de recursos da plataforma (memória, CPU, requisições)
+
 
 
 
