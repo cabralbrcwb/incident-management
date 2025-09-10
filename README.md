@@ -7,7 +7,19 @@
 
 ## 📋 Visão Geral
 
-Uma aplicação full-stack para gerenciamento de incidentes, desenvolvida com o SAP Cloud Application Programming Model (CAP) usando Java e implantada na SAP Business Technology Platform (BTP).
+A solução oferece uma plataforma completa para rastreamento, gerenciamento e resolução de incidentes, com as seguintes características:
+
+Backend: Construído com SAP CAP e Java, expondo serviços OData para o frontend. Inclui lógica de negócios customizada para automação de processos e validações de dados.
+
+Frontend: Interface de usuário moderna e responsiva desenvolvida com SAP Fiori Elements.
+
+Banco de Dados: Utiliza SAP HANA Cloud para persistência de dados.
+
+Segurança: Implementa controle de acesso granular baseado em papéis (suporte/admin) através do SAP Authorization and Trust Management.
+
+Integração: Consome a API externa ViaCEP para preenchimento automático de endereços.
+
+Implantação: Empacotada como uma Multi-Target Application (MTA) para deploy simplificado no ambiente Cloud Foundry.
 
 ## 🚀 Principais Recursos
 
